@@ -56,7 +56,7 @@ public class PaintActivity extends Activity implements ChannelListener, DeviceAc
         // we will try once more
         if (manager != null && !retryChannel) {
             Toast.makeText(this, "Channel lost. Trying again", Toast.LENGTH_LONG).show();
-            resetData();
+            //resetData();
             retryChannel = true;
             manager.initialize(this, getMainLooper(), this);
         } else {
