@@ -65,7 +65,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
                 activity.setIsWifiP2pEnabled(true);
             } else {
                 activity.setIsWifiP2pEnabled(false);
-                activity.resetData();
+                //activity.resetData();
 
             }
             Log.d(PaintActivity.TAG, "P2P state changed - " + state);

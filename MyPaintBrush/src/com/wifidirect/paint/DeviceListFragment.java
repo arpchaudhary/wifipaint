@@ -46,6 +46,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     ProgressDialog progressDialog = null;
     View mContentView = null;
     private WifiP2pDevice device;
+    private final String TAG = "DeviceListFragment";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -161,7 +162,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
         peers.addAll(peerList.getDeviceList());
         ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
         if (peers.size() == 0) {
-            Log.d(WiFiDirectActivity.TAG, "No devices found");
+            Log.d(TAG, "No devices found");
             return;
         }
 
