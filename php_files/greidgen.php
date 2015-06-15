@@ -1,8 +1,7 @@
 <?php
 
-//Elegant solution using the reflectionclass . 
+//Elegant solution using the reflectionclass 
 //Creates a basic enum type implementation
-
 abstract class Enum
 {
     final public function __construct($value)
@@ -214,6 +213,6 @@ class GridMaker{
 //so that php does not have to take care of reading in general
 
 $game_grid = new GridMaker(8, array("Arpit", "Test", "One"));
-//echo $game_grid->getRawGrid();
-echo $game_grid->getProcessedGrid();
+echo $game_grid->getRawGrid();
+//echo $game_grid->getProcessedGrid();
 ?>
