@@ -3,7 +3,7 @@
 import requests
 import json
 
-hit_url = "http://192.168.1.91/wpg/gridgen.php?len=8&words=abhay,arpit,varun,sainyam,joel,aman,monk"
+hit_url = "http://192.168.1.91/wpg/gridgennew.php?len=8&words=abhay,arpit,varun,sainyam,joel,aman,monk"
 grid_len = 8
 r = requests.get(hit_url)
 if r.status_code == requests.codes.ok :

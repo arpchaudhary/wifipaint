@@ -156,9 +156,6 @@ class GridMaker{
 		$this->word_list = $word_list;
 		$this->alpha_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		$this->grid = new Grid($start_point, $end_point);
-
-		
-
 	}
 
 	private function setRandomData(){
@@ -178,10 +175,17 @@ class GridMaker{
 		}
 	}
 
+	private function validateWords(){
+		foreach($this->word_list as $word)
+	}
+
 	public function runGridEngine(){
 		//this is a proxy call for getRandomData
 		$this->setRandomData();
 
+		foreach($word_list as $word){
+			$randomPoint = (new Point());
+		}
 		//This will fill the raw grid.
 		
 		// foreach($word_list as $word){
