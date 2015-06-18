@@ -176,16 +176,19 @@ class GridMaker{
 	}
 
 	private function validateWords(){
-		foreach($this->word_list as $word)
+		foreach($this->word_list as $word) {
+
+		}
 	}
 
 	public function runGridEngine(){
 		//this is a proxy call for getRandomData
 		$this->setRandomData();
+		echo $this->word_list;
 
-		foreach($word_list as $word){
-			$randomPoint = (new Point());
-		}
+		// foreach($this->word_list as $word){
+		// 	$randomPoint = (new Point());
+		// }
 		//This will fill the raw grid.
 		
 		// foreach($word_list as $word){
@@ -230,7 +233,20 @@ class GridMaker{
 //We can also put it in redis in different sets 
 //so that php does not have to take care of reading in general
 
+
+
+$input_len = 8;
+$input_words = array("arpit", "ABHAY", "VARUN", "ANKIT", "HIMANSHU", "URMILESH", "AMAN", "MONK");
+
+//convert all the words to upper case
+foreach($input_words as $key => $word){
+	if(!ctype_upper($word)){
+		echo "error";
+	}
+}
+
+print_r($input_words);
 $game_grid = new GridMaker(8, array("ARPIT", "ABHAY", "VARUN", "ANKIT", "HIMANSHU", "URMILESH", "AMAN", "MONK"));
-echo $game_grid->getProcessedGrid();
 //echo $game_grid->getProcessedGrid();
+
 ?>
