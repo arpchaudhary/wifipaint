@@ -1,23 +1,24 @@
 <?php
 
+require_once('./helpers.php');
 //Elegant solution using the reflectionclass 
 //Creates a basic enum type implementation
-abstract class Enum
-{
-    final public function __construct($value)
-    {
-        $c = new ReflectionClass($this);
-        if(!in_array($value, $c->getConstants())) {
-            throw IllegalArgumentException();
-        }
-        $this->value = $value;
-    }
+// abstract class Enum
+// {
+//     final public function __construct($value)
+//     {
+//         $c = new ReflectionClass($this);
+//         if(!in_array($value, $c->getConstants())) {
+//             throw IllegalArgumentException();
+//         }
+//         $this->value = $value;
+//     }
 
-    final public function __toString()
-    {
-        return $this->value;
-    }
-}
+//     final public function __toString()
+//     {
+//         return $this->value;
+//     }
+// }
 
 class Point{
 	public $x;
@@ -147,6 +148,7 @@ class GridMaker{
 	private $length;
 	private $alpha_list;
 	private $word_list;
+	private $error;
 
 	public function __construct($length, $word_list){
 		
@@ -158,7 +160,7 @@ class GridMaker{
 		$this->grid = new Grid($start_point, $end_point);
 	}
 
-	private function setRandomData(){
+	private function setStaticData(){
 		$random_str = "HZABHAYUYIXEIORATKMHNMURIDGAIPKPKBMLNMQINAEOOSRTASCMNTHMHNURAVSU";
 		$i = $j =  0;
 		$len = 8;
@@ -177,14 +179,21 @@ class GridMaker{
 
 	private function validateWords(){
 		foreach($this->word_list as $word) {
-
+			if(strlen($word) > $this->length)
+				return False;
 		}
+		return True;
 	}
 
 	public function runGridEngine(){
 		//this is a proxy call for getRandomData
-		$this->setRandomData();
-		echo $this->word_list;
+		if($this->validateWords()){
+			$this->setStaticData();
+			print_r($this->word_list);
+		}else{
+			$this->error = "Word length exceeds grid size";
+			echo "Doomed" . PHP_EOL;
+		}
 
 		// foreach($this->word_list as $word){
 		// 	$randomPoint = (new Point());
@@ -203,7 +212,10 @@ class GridMaker{
 		$this->runGridEngine();
 		$result = array();
 		$result["len"] = $this->length;
-		$result["grid"] = $this->grid->getGrid();
+		if(empty($this->error))
+			$result["grid"] = $this->grid->getGrid();
+		else
+			$result["error"] = $this->error;
 		$result["word_list"] = $this->word_list;
 		//$grid_arr = array();
 		// for($i = 0; $i < $this->length; $i++){
@@ -219,8 +231,6 @@ class GridMaker{
 		//$result["grid"] = $grid_arr;
 		return json_encode($result, JSON_PRETTY_PRINT);
 	}
-
-
 
 	public function getRawGrid(){
 		return (string)$this->grid;
@@ -240,13 +250,15 @@ $input_words = array("arpit", "ABHAY", "VARUN", "ANKIT", "HIMANSHU", "URMILESH",
 
 //convert all the words to upper case
 foreach($input_words as $key => $word){
+	
 	if(!ctype_upper($word)){
-		echo "error";
+		$input_words[$key] = strtoupper($word);
 	}
+
+	$input_words[$key] = str_replace(' ', '', $word);
 }
 
-print_r($input_words);
-$game_grid = new GridMaker(8, array("ARPIT", "ABHAY", "VARUN", "ANKIT", "HIMANSHU", "URMILESH", "AMAN", "MONK"));
-//echo $game_grid->getProcessedGrid();
+$game_grid = new GridMaker($input_len, $input_words);
+echo $game_grid->getProcessedGrid();
 
 ?>

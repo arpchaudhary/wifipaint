@@ -37,4 +37,9 @@ function log_debug( $log_line ) {
         file_put_contents($log_file, $log_line, FILE_APPEND | LOCK_EX);
 }
 
+function sort($a, $b) {
+	return strlen($b) - strlen($a);
+}
+
+
 ?>
