@@ -33,13 +33,20 @@ function init(){
 function log_debug( $log_line ) {
         $log_file = './gridgen.log';
         $time_stamp = new DateTime();
-        $log_line = $time_stamp -> format("Y-m-d H:i:s") . $log_line . "\n";
+        $log_line = $time_stamp -> format("Y-m-d H:i:s") . " $log_line" . "\n";
         file_put_contents($log_file, $log_line, FILE_APPEND | LOCK_EX);
 }
 
-function sort($a, $b) {
-	return strlen($b) - strlen($a);
+function len_alpha_sort($a, $b) {
+    $len_a = strlen($a);
+    $len_b = strlen($b);
+    if($len_a == $len_b)
+        return strcmp($a, $b);
+    else
+	   return strlen($b) - strlen($a);
 }
+
+
 
 
 ?>
